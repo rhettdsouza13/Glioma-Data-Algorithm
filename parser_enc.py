@@ -50,18 +50,22 @@ for i,sample in enumerate(raw_data_set):
             raw_data_set[i][j] = 3
             continue
         if feature == 'RIP':
-            raw_data_set[i][j] = 0
+            raw_data_set[i][j] = [0,1]
             continue
         if feature == 'Alive':
-            raw_data_set[i][j] = 1
+            raw_data_set[i][j] = [1,0]
             continue
         raw_data_set[i][j] = float(raw_data_set[i][j])
 
 labels = []
 inputs = []
+numpy.random.shuffle(raw_data_set)
 for sample in raw_data_set:
     labels.append(sample[len(sample)-1])
     inputs.append(sample[:-1])
 
-def input_inject_GLIOMA():
+def input_inject_GLIOMA_MLP():
     return inputs, labels
+
+# inputs, labels = input_inject_GLIOMA()
+# print inputs, labels
