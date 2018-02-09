@@ -80,6 +80,11 @@ with open('shuffled_GLIOMA.csv', 'wb+') as file_store:
 
 print raw_data_set
 
+for dat in raw_data_set:
+    del dat[4]
+    del dat[4]
+    continue
+print len(raw_data_set[10])
 for sample in raw_data_set:
     labels.append(sample[len(sample)-1])
     inputs.append(sample[:-1])

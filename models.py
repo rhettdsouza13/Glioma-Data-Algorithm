@@ -5,11 +5,11 @@ from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
 inputs, labels = input_inject_GLIOMA_MLP()
-set_br = 45
-set_br_SVM = 45
-set_br_DT = 45
+set_br = 40
+set_br_SVM = 40
+set_br_DT = 40
 
-estimator = MLPClassifier(hidden_layer_sizes = (5), batch_size = 5, max_iter=1000, solver='adam')
+estimator = MLPClassifier(hidden_layer_sizes = (100,100,), batch_size = 5, max_iter=1000, solver='adam')
 estimator.fit(inputs[:set_br], labels[:set_br])
 print "Trained"
 #
@@ -47,7 +47,7 @@ print wrong_0
 # print accuracy_score(labels[set_br:], predicted.argmax(axis=1))
 
 
-clf = SVC(kernel='rbf')
+clf = SVC(kernel='rbf', C=100.0, gamma=0.1)
 labels_SVM = [0 if i[0] == 0 else 1 for i in labels]
 print labels_SVM, len(labels_SVM)
 clf.fit(inputs[:set_br_SVM], labels_SVM[:set_br_SVM])
