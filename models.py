@@ -1,5 +1,6 @@
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
 from parser_enc import *
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
@@ -8,6 +9,7 @@ inputs, labels = input_inject_GLIOMA_MLP()
 set_br = 40
 set_br_SVM = 40
 set_br_DT = 40
+set_br_LR = 40
 
 estimator = MLPClassifier(hidden_layer_sizes = (100,100,), batch_size = 5, max_iter=1000, solver='adam')
 estimator.fit(inputs[:set_br], labels[:set_br])
@@ -108,6 +110,39 @@ for pred,lab in zip(predicted_dt, labels_SVM[set_br_DT:]):
 
 accuracy_dt = float(float(correct)/len(labels_SVM[set_br_DT:]))
 print accuracy_dt
+print correct_1 + correct_0 + wrong_0 + wrong_1
+print correct_1
+print correct_0
+print wrong_1
+print wrong_0
+
+
+classifier = LogisticRegression(C=150.0)
+classifier.fit(inputs[:set_br_LR],labels_SVM[:set_br_LR])
+predicted_lr = classifier.predict(inputs[set_br_LR:])
+print predicted_lr
+
+correct_1 = 0
+correct_0 = 0
+wrong_1 = 0
+wrong_0 = 0
+correct = 0
+for pred,lab in zip(predicted_lr, labels_SVM[set_br_LR:]):
+    if pred == lab:
+        correct += 1
+    if pred == lab and lab == 0 :
+        correct_0 += 1
+    elif pred == lab and lab == 1 :
+        correct_1 += 1
+    elif pred != lab and lab == 1 :
+        wrong_1 += 1
+    elif pred != lab and lab == 0 :
+        wrong_0 += 1
+    else:
+        continue
+
+accuracy_lr = float(float(correct)/len(labels_SVM[set_br_LR:]))
+print accuracy_lr
 print correct_1 + correct_0 + wrong_0 + wrong_1
 print correct_1
 print correct_0
