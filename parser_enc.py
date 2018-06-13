@@ -73,10 +73,11 @@ labels = []
 inputs = []
 
 numpy.random.shuffle(raw_data_set)
-with open('shuffled_GLIOMA.csv', 'wb+') as file_store:
-    wr = csv.writer(file_store)
-    for row in raw_data_set:
-        wr.writerow(row)
+
+# with open('shuffled_GLIOMA.csv', 'wb+') as file_store:
+#     wr = csv.writer(file_store)
+#     for row in raw_data_set:
+#         wr.writerow(row)
 
 print raw_data_set
 
@@ -84,6 +85,7 @@ for dat in raw_data_set:
     #del dat[4]
     #del dat[4]
     continue
+
 print len(raw_data_set[10])
 for sample in raw_data_set:
     labels.append(sample[len(sample)-1])
@@ -94,10 +96,30 @@ scaler.fit(inputs)
 print scaler.data_max_
 inputs = scaler.transform(inputs)
 inputs = normalize(inputs)
+#
+# numpy.save("shuffled_GLIOMA_nump_inp.npy", inputs)
+# numpy.save("shuffled_GLIOMA_nump_lab.npy", labels)
+
+# inputs = numpy.load("shuffled_GLIOMA_nump_inp.npy")
+# labels = numpy.load("shuffled_GLIOMA_nump_lab.npy")
 
 def input_inject_GLIOMA_MLP():
+    labels = []
+    inputs = []
+    numpy.random.shuffle(raw_data_set)
+
+    print len(raw_data_set[10])
+    for sample in raw_data_set:
+        labels.append(sample[len(sample)-1])
+        inputs.append(sample[:-1])
+
+    scaler = MinMaxScaler(feature_range = (0,1))
+    scaler.fit(inputs)
+    # print scaler.data_max_
+    inputs = scaler.transform(inputs)
+    inputs = normalize(inputs)
     return inputs, labels
 
-inputs, labels = input_inject_GLIOMA_MLP()
-print inputs
-print labels
+# inputs, labels = input_inject_GLIOMA_MLP()
+# print inputs
+# print labels

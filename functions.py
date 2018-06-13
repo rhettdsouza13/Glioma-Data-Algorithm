@@ -27,3 +27,14 @@ def bias_initializer(shape):
   return tf.Variable(initial)
 
 # print weight_initializer([1024,601])
+
+
+def element_wise_add(first, second):
+    out = []
+    if len(first) == 0:
+        return second
+    if len(second) == 0:
+        return first
+    for i,j in zip(xrange(len(first)), xrange(len(second))):
+        out.append(first[i]+second[j])
+    return out
