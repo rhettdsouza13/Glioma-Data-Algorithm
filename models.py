@@ -257,7 +257,7 @@ for i in xrange(n_runs):
 
 
 
-
+n_runs = float(n_runs)
 metrics['ann'][:] = [x/n_runs for x in metrics['ann']]
 metrics['dt'][:] = [x/n_runs for x in metrics['dt']]
 metrics['svm'][:] = [x/n_runs for x in metrics['svm']]
