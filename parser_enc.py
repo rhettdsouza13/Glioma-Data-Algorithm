@@ -67,7 +67,12 @@ for i,sample in enumerate(raw_data_set):
         #     continue
         raw_data_set[i][j] = float(raw_data_set[i][j])
 
-
+counter = 0
+for val in raw_data_set:
+    counter += 1
+    if len(val) < 9:
+        print val
+        print counter 
 
 labels = []
 inputs = []
@@ -92,6 +97,7 @@ for sample in raw_data_set:
     inputs.append(sample[:-1])
 
 scaler = MinMaxScaler(feature_range = (0,1))
+print inputs
 scaler.fit(inputs)
 print scaler.data_max_
 inputs = scaler.transform(inputs)
