@@ -295,5 +295,5 @@ pl.legend([ann,svm,dt,lr], ["Artificial Neural Network", "Support Vector Machine
 pl.title("Receiver Operating Curves for Models")
 pl.xlabel("1-Specificity")
 pl.ylabel("Sensitivity")
-pl.savefig('roc3.png')
+pl.savefig('roc4.png')
 # pl.show()

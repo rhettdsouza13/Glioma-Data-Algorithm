@@ -9,7 +9,7 @@ def customized_box_plot(percentiles, axes, redraw = True, *args, **kwargs):
     # Creates len(percentiles) no of box plots
 
     min_y, max_y = float('inf'), -float('inf')
-    ax.set_xticklabels(['A', 'B', 'C', 'D'])
+    ax.set_xticklabels(['Artificial Neural Network', 'Support Vector Machine', 'Logistic Regression', 'Decision Tree'])
     ax.set_xticks([1.5, 4.5, 7.5, 10.5])
 
     for box_no, (q1_start,
@@ -71,7 +71,26 @@ def customized_box_plot(percentiles, axes, redraw = True, *args, **kwargs):
 # 0.8939275
 # 0.97242
 
-percentiles = [[0.65845,0.7369425,0.82,0.8939275,0.97242, []], [0.22478,0.3635925,0.50,0.6412175,0.78003,[]]]
+# percentiles = [[0.65845,0.7369425,0.82,0.8939275,0.97242, []], [0.22478,0.3635925,0.50,0.6412175,0.78003,[]],
+# [0.62948,0.7112975,0.79312,0.8749325,0.95675,[]],
+# ]
+percentiles = []
+st_dt_f = open("stat_dat.txt", 'r')
+# print st_dt_f.readlines()[0].strip().split()
+# print st_dt_f.readlines()[0]
+st_dt = [x.strip().split() for x in st_dt_f.readlines()]
+print st_dt
+# st_dt = [float(y) for y in x for x in st_dt]
+data = []
+for x in st_dt:
+    ys = []
+    for y in x:
+        ys.append(float(y))
+    ys.append([])
+    data.append(ys)
+
+# st_dt = [x.append([]) for x in st_dt]
+print data
 fig, ax = plt.subplots()
-b = customized_box_plot(percentiles, ax, redraw=True, notch=0, sym='+', vert=1, whis=1.5)
+b = customized_box_plot(data, ax, redraw=True, notch=0, sym='+', vert=1, whis=1.5)
 plt.show()

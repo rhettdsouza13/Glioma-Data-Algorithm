@@ -5,7 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import normalize
 
 raw_data_set = []
-with open("Glioma Data.xlsx - Sheet1.csv", 'r') as g_d_csv:
+with open("GLIOMA DATA SIGNIFICANT_pro - Glioma Data.xlsx - Sheet1.csv", 'r') as g_d_csv:
     f_reader = csv.reader(g_d_csv, delimiter=' ', quotechar='|')
     for row in f_reader:
         raw_data_set.append(row[0].split(','))
@@ -72,7 +72,7 @@ for val in raw_data_set:
     counter += 1
     if len(val) < 9:
         print val
-        print counter 
+        print counter
 
 labels = []
 inputs = []
